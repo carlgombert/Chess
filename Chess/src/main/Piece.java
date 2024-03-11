@@ -2,6 +2,13 @@ package main;
 
 import java.util.Scanner;
 
+import main.pieces.Bishop;
+import main.pieces.King;
+import main.pieces.Knight;
+import main.pieces.Pawn;
+import main.pieces.Queen;
+import main.pieces.Rook;
+
 public class Piece {
     // Create Instance Variables
 	private char character;
@@ -94,6 +101,7 @@ public class Piece {
      * @return  A string representation of the piece.
      */
     public String toString() {
+    	return ""+character;
     }
 
 

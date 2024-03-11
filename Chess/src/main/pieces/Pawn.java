@@ -1,5 +1,7 @@
 package main.pieces;
 
+import main.Board;
+
 public class Pawn {
 
     /**
