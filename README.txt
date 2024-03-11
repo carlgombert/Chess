@@ -3,6 +3,14 @@ Group members’ names and x500s:
 
 Contributions of each partner:
   Carl:
+    Implemented chess pieces
+    Implemented board class
+    Assisted with JUnit testing
+
+  Carson:
+    Implemented game class
+    Assisted with movement verification methods
+    Implemented JUnit testing
 
 How to compile and run program:
 
