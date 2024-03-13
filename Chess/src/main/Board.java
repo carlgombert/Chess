@@ -136,6 +136,9 @@ public class Board {
         if(xDistance == 1 || yDistance == 1) {
         	return true;
         }
+        else if(xDistance == 0 && yDistance == 0) {
+        	return true;
+        }
         return false;
     }
 
@@ -162,6 +165,9 @@ public class Board {
     			}
     			return true;
     		}
+    		else {
+				return true;
+			}
         }
         return false;
     }
@@ -189,6 +195,9 @@ public class Board {
     			}
     			return true;
     		}
+    		else {
+				return true;
+			}
         }
         return false;
     }
@@ -212,12 +221,15 @@ public class Board {
     				}
     				return true;
     			}
-    			if(startCol < endCol) {
+    			else if(startCol < endCol) {
     				for(int i = 1; i < startRow-endRow; i++) {
     					if(board[startRow-i][startCol+i] != null) {
         					return false;
         				}
     				}
+    				return true;
+    			}
+    			else {
     				return true;
     			}
     		}
@@ -230,12 +242,15 @@ public class Board {
     				}
     				return true;
     			}
-    			if(startCol < endCol) {
+    			else if(startCol < endCol) {
     				for(int i = 1; i < endRow-startRow; i++) {
     					if(board[startRow+i][startCol+i] != null) {
         					return false;
         				}
     				}
+    				return true;
+    			}
+    			else {
     				return true;
     			}
     		}
