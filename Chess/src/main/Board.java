@@ -203,7 +203,42 @@ public class Board {
         int yDistance = Math.abs(startCol - endCol);
         
     	if(xDistance == yDistance) {
-        	return true;
+    		if(startRow > endRow) {
+    			if(startCol > endCol) {
+    				for(int i = 1; i < startRow-endRow; i++) {
+    					if(board[startRow-i][startCol-i] != null) {
+        					return false;
+        				}
+    				}
+    				return true;
+    			}
+    			if(startCol < endCol) {
+    				for(int i = 1; i < startRow-endRow; i++) {
+    					if(board[startRow-i][startCol+i] != null) {
+        					return false;
+        				}
+    				}
+    				return true;
+    			}
+    		}
+    		if(startRow < endRow) {
+    			if(startCol > endCol) {
+    				for(int i = 1; i < endRow-startRow; i++) {
+    					if(board[startRow+i][startCol-i] != null) {
+        					return false;
+        				}
+    				}
+    				return true;
+    			}
+    			if(startCol < endCol) {
+    				for(int i = 1; i < endRow-startRow; i++) {
+    					if(board[startRow+i][startCol+i] != null) {
+        					return false;
+        				}
+    				}
+    				return true;
+    			}
+    		}
         }
         return false;
     }

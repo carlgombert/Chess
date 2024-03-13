@@ -32,6 +32,7 @@ public class Fen {
 
         // begin hashmap solution
         Character[][] keysVals = new Character[][] {
+        	
                 {'p', '\u265f'}, {'P', '\u2659'}, {'r', '\u265c'}, {'R', '\u2656'}, {'n', '\u265e'}, {'N', '\u2658'},
                 {'b', '\u265d'}, {'B', '\u2657'}, {'q', '\u265b'}, {'Q', '\u2655'}, {'k', '\u265a'}, {'K', '\u2654'}
         };
