@@ -133,11 +133,8 @@ public class Board {
         int xDistance = Math.abs(startRow - endRow);
         int yDistance = Math.abs(startCol - endCol);
         
-        if(xDistance == 1 || yDistance == 1) {
-        	return true;
-        }
-        else if(xDistance == 0 && yDistance == 0) {
-        	return true;
+        if(xDistance < 2 && yDistance < 2) {
+	        return true;
         }
         return false;
     }
@@ -233,7 +230,7 @@ public class Board {
     				return true;
     			}
     		}
-    		if(startRow < endRow) {
+    		else if(startRow < endRow) {
     			if(startCol > endCol) {
     				for(int i = 1; i < endRow-startRow; i++) {
     					if(board[startRow+i][startCol-i] != null) {
@@ -253,6 +250,9 @@ public class Board {
     			else {
     				return true;
     			}
+    		}
+    		else if(startCol == endCol) {
+    			return true;
     		}
         }
         return false;
