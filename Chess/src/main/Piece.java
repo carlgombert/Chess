@@ -92,11 +92,19 @@ public class Piece {
      * @param isBlack Color of the pawn
      */
     public void promotePawn(int row, boolean isBlack) {
-
+    	
     }
 
 
-    /**
+    public char getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(char character) {
+		this.character = character;
+	}
+
+	/**
      * Returns a string representation of the piece.
      * @return  A string representation of the piece.
      */

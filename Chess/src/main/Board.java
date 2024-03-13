@@ -36,9 +36,9 @@ public class Board {
     // and to execute the move if it is.
     // Your Game class should not directly call any other method of this class.
     // Hint: this method should call isMoveLegal() on the starting piece. 
-    public boolean movePiece(int startRow, int startCol, int endRow, int endCol) {
+    public boolean movePiece(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
     	
-    	if(verifySourceAndDestination(endCol, endCol, endCol, endCol, false)) {
+    	if(verifySourceAndDestination(startRow, startCol, endCol, endCol, isBlack)) {
     		if(board[startRow][startCol].isMoveLegal(this, endRow, endCol)) {
     			board[endRow][endCol] = board[startRow][startCol];
     			board[startRow][startCol] = null;
@@ -52,7 +52,20 @@ public class Board {
     // Determines whether the game has been ended, i.e., if one player's King
     // has been captured.
     public boolean isGameOver() {
-        return false;
+    	int kingCount = 0;
+        for(int i = 0; i < board.length; i++) {
+        	for(int n = 0; n < board[i].length; n++) {
+        		if(board[i][n] != null) {
+	        		if(board[i][n].getCharacter() == '\u265a' || board[i][n].getCharacter() == '\u2654') {
+	        			kingCount++;
+	        		}
+        		}
+        	}
+        }
+        if(kingCount == 2) {
+        	return false;
+        }
+        return true;
     }
 
     // Constructs a String that represents the Board object's 2D array.
