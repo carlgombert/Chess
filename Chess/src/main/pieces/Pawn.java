@@ -39,6 +39,8 @@ public class Pawn {
                 if (this.isBlack) {
                     return (endRow == this.row + 1);
                 } else {
+                	System.out.println(this.row);
+                	System.out.println(endRow);
                     return (endRow == this.row - 1);
                 }
             } else {

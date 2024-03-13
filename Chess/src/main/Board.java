@@ -38,10 +38,11 @@ public class Board {
     // Hint: this method should call isMoveLegal() on the starting piece. 
     public boolean movePiece(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
     	
-    	if(verifySourceAndDestination(startRow, startCol, endCol, endCol, isBlack)) {
+    	if(verifySourceAndDestination(startRow, startCol, endRow, endCol, isBlack)) {
     		if(board[startRow][startCol].isMoveLegal(this, endRow, endCol)) {
     			board[endRow][endCol] = board[startRow][startCol];
     			board[startRow][startCol] = null;
+    			board[endRow][endCol].setPosition(endRow, endCol);
     			return true;
     		}
     	}
@@ -111,12 +112,15 @@ public class Board {
     // - 'end' contains either no Piece or a Piece of the opposite color.
     // - where 'start' = (startRow, startCol) and 'end' = (endRow, endCol)
     public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
-        boolean startBounds = (startRow >= 0 && startRow <= 8) && (startCol >= 0 && startCol <= 8);
-        boolean endBounds = (endRow >= 0 && endRow <= 8) && (endCol >= 0 && endCol <= 8);
+        boolean startBounds = (startRow >= 0 && startRow <= 7) && (startCol >= 0 && startCol <= 7);
+        boolean endBounds = (endRow >= 0 && endRow <= 7) && (endCol >= 0 && endCol <= 7);
         
         if(startBounds && endBounds) {
         	if(board[startRow][startCol] != null) {
         		if(board[startRow][startCol].getIsBlack() == isBlack) {
+        			System.out.println(board[startRow][startCol]);
+        			System.out.println(board[endRow][endCol]);
+        			System.out.println(board[endRow+1][endCol]);
         			if(board[endRow][endCol] == null || board[endRow][endCol].getIsBlack() != isBlack) {
             			return true;
             		}
