@@ -2,6 +2,18 @@ package main;
 
 import java.util.Scanner;
 
+/**
+ * Description of method’s functionality
+ *
+ * @param  myParameter  description of myParameters usage
+ * @return         what the method is returning
+ */
+
+/**
+ * Description of class purpose and functionality
+ */
+
+
 public class Game {
 	public static void main(String[] args) {
 		boolean running = true;
