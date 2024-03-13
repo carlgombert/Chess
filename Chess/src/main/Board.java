@@ -118,9 +118,6 @@ public class Board {
         if(startBounds && endBounds) {
         	if(board[startRow][startCol] != null) {
         		if(board[startRow][startCol].getIsBlack() == isBlack) {
-        			System.out.println(board[startRow][startCol]);
-        			System.out.println(board[endRow][endCol]);
-        			System.out.println(board[endRow+1][endCol]);
         			if(board[endRow][endCol] == null || board[endRow][endCol].getIsBlack() != isBlack) {
             			return true;
             		}
@@ -149,7 +146,22 @@ public class Board {
     // - All spaces directly between 'start' and 'end' are empty, i.e., null.
     public boolean verifyHorizontal(int startRow, int startCol, int endRow, int endCol) {
     	if(startRow - endRow == 0) {
-        	return true;
+    		if(startCol > endCol) {
+    			for(int i = endCol+1; i < startCol; i++) {
+    				if(board[startRow][i] != null) {
+    					return false;
+    				}
+    			}
+    			return true;
+    		}
+    		else if(startCol < endCol) {
+    			for(int i = startCol+1; i < endCol; i++) {
+    				if(board[startRow][i] != null) {
+    					return false;
+    				}
+    			}
+    			return true;
+    		}
         }
         return false;
     }
@@ -161,7 +173,22 @@ public class Board {
     // - All spaces directly between 'start' and 'end' are empty, i.e., null.
     public boolean verifyVertical(int startRow, int startCol, int endRow, int endCol) {
     	if(startCol - endCol == 0) {
-        	return true;
+    		if(startRow > endRow) {
+    			for(int i = endRow+1; i < startRow; i++) {
+    				if(board[i][startCol] != null) {
+    					return false;
+    				}
+    			}
+    			return true;
+    		}
+    		else if(startRow < endRow) {
+    			for(int i = startRow+1; i < endRow; i++) {
+    				if(board[i][startCol] != null) {
+    					return false;
+    				}
+    			}
+    			return true;
+    		}
         }
         return false;
     }
