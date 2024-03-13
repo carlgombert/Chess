@@ -74,8 +74,19 @@ public class Piece {
      * @param col   The column to move the piece to.
      */
     public void setPosition(int row, int col) {
-    	this.row = row;
-    	this.col = col;
+        if(this.character == '\u265f' && this.isBlack && row == 7){
+            this.row = row;
+            this.col = col;
+            this.promotePawn(row, true);
+        } else if(this.character == '\u2659' && !this.isBlack && row == 0){
+            this.row = row;
+            this.col = col;
+            this.promotePawn(row, false);
+        } else{
+            this.row = row;
+            this.col = col;
+        }
+
     }
 
     /**
@@ -92,7 +103,46 @@ public class Piece {
      * @param isBlack Color of the pawn
      */
     public void promotePawn(int row, boolean isBlack) {
-    	
+    	Scanner pieceCheck = new Scanner(System.in);
+        System.out.println("Enter the type you want to promote to (Knight, Bishop, Rook, or Queen");
+        System.out.println("Enter 1,2,3,4 respectively");
+        boolean checking = true;
+        int input = 0;
+        while(checking) {
+            try {
+                input = pieceCheck.nextInt();
+                if(input == 1 || input == 2 || input == 3 || input == 4) {
+                    checking = false;
+                } else{
+                    System.out.println("Enter either 1, 2, 3, or 4");
+                }
+            } catch (Exception e) {
+                System.out.println("Enter either 1, 2, 3, or 4");
+                checking = true;
+            }
+        }
+        if(!isBlack){
+            if(input == 1){
+                this.character = '\u2658';
+            } else if(input == 2) {
+                this.character = '\u2657';
+            } else if(input == 3){
+                this.character = '\u2656';
+            } else if (input == 4){
+                this.character = '\u2655';
+            }
+        } else if(isBlack){
+            if(input == 1){
+                this.character = '\u265e';
+            } else if(input == 2) {
+                this.character = '\u265d';
+            } else if(input == 3){
+                this.character = '\u265c';
+            } else if (input == 4){
+                this.character = '\u265b';
+            }
+        }
+
     }
 
 
