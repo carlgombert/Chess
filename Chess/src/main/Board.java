@@ -7,7 +7,10 @@ public class Board {
 
     //TODO:
     // Construct an object of type Board using given arguments.
-    public Board() {
+	/**
+	 * Constructor making the board variable
+	 */
+	public Board() {
     	board = new Piece[8][8];
     }
 
@@ -15,13 +18,25 @@ public class Board {
 
     //TODO:
     // Return the Piece object stored at a given row and column
-    public Piece getPiece(int row, int col) {
+	/**
+	 * returns a piece at given row and column
+	 * @param  row the row of the board to look in
+	 * @param  col the column of the board to look in
+	 * @return Piece at given row and column
+	 */
+	public Piece getPiece(int row, int col) {
         return board[row][col];
     }
 
     //TODO:
     // Update a single cell of the board to the new piece.
-    public void setPiece(int row, int col, Piece piece) {
+	/**
+	 * changes the piece at given row and column
+	 * @param  row  row on the board to which will be changed
+	 * @param col column on the board to be changed
+	 * @param piece the new piece to be set
+	 */
+	public void setPiece(int row, int col, Piece piece) {
     	board[row][col] = piece;
     }
 
@@ -35,8 +50,17 @@ public class Board {
     // This method calls all necessary helper functions to determine if a move is legal,
     // and to execute the move if it is.
     // Your Game class should not directly call any other method of this class.
-    // Hint: this method should call isMoveLegal() on the starting piece. 
-    public boolean movePiece(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
+    // Hint: this method should call isMoveLegal() on the starting piece.
+	/**
+	 * Moves a piece after verifying it is a legal move
+	 * @param  startRow
+	 * @param  startCol
+	 * @param  endRow
+	 * @param  endCol
+	 * @param  isBlack
+	 * @return boolean if the piece is moved return true if it is un able to return false
+	 */
+	public boolean movePiece(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
     	
     	if(verifySourceAndDestination(startRow, startCol, endRow, endCol, isBlack)) {
     		if(board[startRow][startCol].isMoveLegal(this, endRow, endCol)) {
@@ -52,7 +76,11 @@ public class Board {
     //TODO:
     // Determines whether the game has been ended, i.e., if one player's King
     // has been captured.
-    public boolean isGameOver() {
+	/**
+	 * determines if the game is won
+	 * @return true if game is won false if game is still valid
+	 */
+	public boolean isGameOver() {
     	int kingCount = 0;
         for(int i = 0; i < board.length; i++) {
         	for(int n = 0; n < board[i].length; n++) {
@@ -92,13 +120,12 @@ public class Board {
 
     //TODO:
     // Sets every cell of the array to null. For debugging and grading purposes.
-    public void clear() {
+	public void clear() {
     	for(int i = 0; i < board.length; i++) {
     		for(int n = 0; n < board[i].length; n++) {
     			board[i][n] = null;
     		}
     	}
-
     }
 
     // Movement helper functions
@@ -111,7 +138,16 @@ public class Board {
     // - Player's color and color of 'start' Piece match.
     // - 'end' contains either no Piece or a Piece of the opposite color.
     // - where 'start' = (startRow, startCol) and 'end' = (endRow, endCol)
-    public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
+	/**
+	 * Ensures that the start and destination are available to be moved and moved to.
+	 * @param startRow The starting row to check
+	 * @param startCol The starting column to check
+	 * @param endRow The end row to check
+	 * @param endCol the end column to check
+	 * @param isBlack piece color
+	 * @return if the source and destination are available, return true, else return false
+	 */
+	public boolean verifySourceAndDestination(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
         boolean startBounds = (startRow >= 0 && startRow <= 7) && (startCol >= 0 && startCol <= 7);
         boolean endBounds = (endRow >= 0 && endRow <= 7) && (endCol >= 0 && endCol <= 7);
         
@@ -129,6 +165,14 @@ public class Board {
 
     //TODO:
     // Check whether the 'start' position and 'end' position are adjacent to each other
+    /**
+     * Verifies if the adjacent squares are free from pieces
+     * @param startRow The starting row to check
+     * @param startCol The starting column to check
+     * @param endRow The end row to check
+     * @param endCol the end column to check
+	 * @return Returns true if available else returns false
+     */
     public boolean verifyAdjacent(int startRow, int startCol, int endRow, int endCol) {
         int xDistance = Math.abs(startRow - endRow);
         int yDistance = Math.abs(startCol - endCol);
@@ -144,6 +188,14 @@ public class Board {
     // Returns a boolean to signify whether:
     // - The entire move takes place on one row.
     // - All spaces directly between 'start' and 'end' are empty, i.e., null.
+	/**
+	 * Verifies that horizontal spaces are free
+	 * @param startRow The starting row to check
+	 * @param startCol The starting column to check
+	 * @param endRow The end row to check
+	 * @param endCol the end column to check
+	 * @return returns true if they are free returns false if they are not
+	 */
     public boolean verifyHorizontal(int startRow, int startCol, int endRow, int endCol) {
     	if(startRow - endRow == 0) {
     		if(startCol > endCol) {
@@ -174,6 +226,14 @@ public class Board {
     // Returns a boolean to signify whether:
     // - The entire move takes place on one column.
     // - All spaces directly between 'start' and 'end' are empty, i.e., null.
+	/**
+	 * Ensures vertical squares are available for movement
+	 * @param startRow The starting row to check
+	 * @param startCol The starting column to check
+	 * @param endRow The end row to check
+	 * @param endCol the end column to check
+	 * @return Returns true if vertical squares are available and false if not
+	 */
     public boolean verifyVertical(int startRow, int startCol, int endRow, int endCol) {
     	if(startCol - endCol == 0) {
     		if(startRow > endRow) {
@@ -204,6 +264,14 @@ public class Board {
     // Returns a boolean to signify whether:
     // - The path from 'start' to 'end' is diagonal... change in row and col.
     // - All spaces directly between 'start' and 'end' are empty, i.e., null.
+	/**
+	 * Verifies if the diagnols are available to move through
+	 * @param startRow The starting row to check
+	 * @param startCol The starting column to check
+	 * @param endRow The end row to check
+	 * @param endCol the end column to check
+	 * @return Returns true if available to move. Returns false if not
+	 */
     public boolean verifyDiagonal(int startRow, int startCol, int endRow, int endCol) {
     	int xDistance = Math.abs(startRow - endRow);
         int yDistance = Math.abs(startCol - endCol);

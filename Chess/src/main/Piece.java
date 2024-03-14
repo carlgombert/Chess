@@ -145,11 +145,17 @@ public class Piece {
 
     }
 
-
+    /**
+     * Returns the character
+     * @return         this.character
+     */
     public char getCharacter() {
 		return character;
 	}
-
+    /**
+     * Sets a new character for a piece
+     * @param  character character to be set
+     */
 	public void setCharacter(char character) {
 		this.character = character;
 	}
