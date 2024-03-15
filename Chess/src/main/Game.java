@@ -58,7 +58,7 @@ public class Game {
 					int row2 = Character.getNumericValue(move[4]);
 					int col2 = Character.getNumericValue(move[6]);
 					
-					if(!board.movePiece(row1, col1, row2, col2, !whiteTurn)) {
+					if(!board.movePiece(row1, col1, row2, col2, !whiteTurn)) { // if move fails
 						System.out.println("invalid move\n");
 					}
 					else {

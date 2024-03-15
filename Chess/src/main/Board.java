@@ -50,11 +50,16 @@ public class Board {
 	 */
 	public boolean movePiece(int startRow, int startCol, int endRow, int endCol, boolean isBlack) {
     	
-    	if(verifySourceAndDestination(startRow, startCol, endRow, endCol, isBlack)) {
-    		if(board[startRow][startCol].isMoveLegal(this, endRow, endCol)) {
-    			board[endRow][endCol] = board[startRow][startCol];
-    			board[startRow][startCol] = null;
-    			board[endRow][endCol].setPosition(endRow, endCol);
+    	if(verifySourceAndDestination(startRow, startCol, endRow, endCol, isBlack)) { // valid start and end points
+    		
+    		if(board[startRow][startCol].isMoveLegal(this, endRow, endCol)) { // make sure move is legal for piece
+    			
+    			board[endRow][endCol] = board[startRow][startCol]; // move piece
+    			
+    			board[startRow][startCol] = null; // remove piece from start
+    			
+    			board[endRow][endCol].setPosition(endRow, endCol); // update position in piece
+    			
     			return true;
     		}
     	}
@@ -67,17 +72,21 @@ public class Board {
 	 * @return true if game is won false if game is still valid
 	 */
 	public boolean isGameOver() {
-    	int kingCount = 0;
+		
+    	int kingCount = 0; // count how many kings on the board
+    	
         for(int i = 0; i < board.length; i++) {
         	for(int n = 0; n < board[i].length; n++) {
         		if(board[i][n] != null) {
 	        		if(board[i][n].getCharacter() == '\u265a' || board[i][n].getCharacter() == '\u2654') {
+	        			
+	        			//the current piece is a king
 	        			kingCount++;
 	        		}
         		}
         	}
         }
-        if(kingCount == 2) {
+        if(kingCount == 2) { // there are two kings on the board
         	return false;
         }
         return true;
@@ -131,10 +140,15 @@ public class Board {
         boolean startBounds = (startRow >= 0 && startRow <= 7) && (startCol >= 0 && startCol <= 7);
         boolean endBounds = (endRow >= 0 && endRow <= 7) && (endCol >= 0 && endCol <= 7);
         
-        if(startBounds && endBounds) {
-        	if(board[startRow][startCol] != null) {
-        		if(board[startRow][startCol].getIsBlack() == isBlack) {
-        			if(board[endRow][endCol] == null || board[endRow][endCol].getIsBlack() != isBlack) {
+        if(startBounds && endBounds) { // if in bounds
+        	
+        	if(board[startRow][startCol] != null) { // if there is a piece at the start
+        		
+        		if(board[startRow][startCol].getIsBlack() == isBlack) { // if the piece being moved is owned by the player
+        			
+        			// if the end either has no piece or a piece of the opposite color
+        			if(board[endRow][endCol] == null || board[endRow][endCol].getIsBlack() != isBlack) { 
+        				
             			return true;
             		}
         		}
@@ -153,10 +167,10 @@ public class Board {
 	 * @return Returns true if available else returns false
      */
     public boolean verifyAdjacent(int startRow, int startCol, int endRow, int endCol) {
-        int xDistance = Math.abs(startRow - endRow);
-        int yDistance = Math.abs(startCol - endCol);
+        int xDistance = Math.abs(startRow - endRow); // finding the tiles moved in x direction
+        int yDistance = Math.abs(startCol - endCol); // finding the tiles moved in y direction
         
-        if(xDistance < 2 && yDistance < 2) {
+        if(xDistance < 2 && yDistance < 2) { // can move 0 or one spaces in any direction
 	        return true;
         }
         return false;
@@ -172,25 +186,26 @@ public class Board {
 	 * @return returns true if they are free returns false if they are not
 	 */
     public boolean verifyHorizontal(int startRow, int startCol, int endRow, int endCol) {
-    	if(startRow - endRow == 0) {
-    		if(startCol > endCol) {
+    	if(startRow - endRow == 0) { // if the row remained the same -> remained horizontal
+    		
+    		if(startCol > endCol) { // if moved left
     			for(int i = endCol+1; i < startCol; i++) {
     				if(board[startRow][i] != null) {
     					return false;
     				}
     			}
-    			return true;
+    			return true; // no pieces in path
     		}
-    		else if(startCol < endCol) {
+    		else if(startCol < endCol) { // if moved right
     			for(int i = startCol+1; i < endCol; i++) {
     				if(board[startRow][i] != null) {
     					return false;
     				}
     			}
-    			return true;
+    			return true; // no pieces in path
     		}
     		else {
-				return true;
+				return true; // didn't move
 			}
         }
         return false;
@@ -206,22 +221,24 @@ public class Board {
 	 * @return Returns true if vertical squares are available and false if not
 	 */
     public boolean verifyVertical(int startRow, int startCol, int endRow, int endCol) {
-    	if(startCol - endCol == 0) {
-    		if(startRow > endRow) {
+    	
+    	if(startCol - endCol == 0) { // if the column remained the same -> remained vertical
+    		
+    		if(startRow > endRow) { // if moved down the board
     			for(int i = endRow+1; i < startRow; i++) {
     				if(board[i][startCol] != null) {
     					return false;
     				}
     			}
-    			return true;
+    			return true; // no pieces in path
     		}
-    		else if(startRow < endRow) {
+    		else if(startRow < endRow) { // if moved up the board
     			for(int i = startRow+1; i < endRow; i++) {
     				if(board[i][startCol] != null) {
     					return false;
     				}
     			}
-    			return true;
+    			return true; // no pieces in path
     		}
     		else {
 				return true;
