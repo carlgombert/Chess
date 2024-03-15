@@ -5,8 +5,6 @@ public class Board {
     // Instance variables
     private Piece[][] board;
 
-    //TODO:
-    // Construct an object of type Board using given arguments.
 	/**
 	 * Constructor making the board variable
 	 */
@@ -16,10 +14,9 @@ public class Board {
 
     // Accessor Methods
 
-    //TODO:
-    // Return the Piece object stored at a given row and column
 	/**
 	 * returns a piece at given row and column
+	 * 
 	 * @param  row the row of the board to look in
 	 * @param  col the column of the board to look in
 	 * @return Piece at given row and column
@@ -28,10 +25,9 @@ public class Board {
         return board[row][col];
     }
 
-    //TODO:
-    // Update a single cell of the board to the new piece.
 	/**
 	 * changes the piece at given row and column
+	 * 
 	 * @param  row  row on the board to which will be changed
 	 * @param col column on the board to be changed
 	 * @param piece the new piece to be set
@@ -42,17 +38,9 @@ public class Board {
 
     // Game functionality methods
 
-    //TODO:
-    // Moves a Piece object from one cell in the board to another, provided that
-    // this movement is legal. A constraint of a legal move is:
-    // - there exists a Piece at (startRow, startCol) and the destination square is seizable.
-    // Returns a boolean to signify success or failure.
-    // This method calls all necessary helper functions to determine if a move is legal,
-    // and to execute the move if it is.
-    // Your Game class should not directly call any other method of this class.
-    // Hint: this method should call isMoveLegal() on the starting piece.
 	/**
 	 * Moves a piece after verifying it is a legal move
+	 * 
 	 * @param  startRow
 	 * @param  startCol
 	 * @param  endRow
@@ -73,11 +61,9 @@ public class Board {
         return false;
     }
 
-    //TODO:
-    // Determines whether the game has been ended, i.e., if one player's King
-    // has been captured.
 	/**
 	 * determines if the game is won
+	 * 
 	 * @return true if game is won false if game is still valid
 	 */
 	public boolean isGameOver() {
@@ -97,8 +83,9 @@ public class Board {
         return true;
     }
 
-    // Constructs a String that represents the Board object's 2D array.
-    // Returns the fully constructed String.
+    /** 
+     * Constructs a String that represents the Board object's 2D array.
+     * */
     public String toString() {
         StringBuilder out = new StringBuilder();
         out.append(" ");
@@ -130,16 +117,9 @@ public class Board {
 
     // Movement helper functions
 
-    //TODO:
-    // Ensure that the player's chosen move is even remotely legal.
-    // Returns a boolean to signify whether:
-    // - 'start' and 'end' fall within the array's bounds.
-    // - 'start' contains a Piece object, i.e., not null.
-    // - Player's color and color of 'start' Piece match.
-    // - 'end' contains either no Piece or a Piece of the opposite color.
-    // - where 'start' = (startRow, startCol) and 'end' = (endRow, endCol)
 	/**
 	 * Ensures that the start and destination are available to be moved and moved to.
+	 * 
 	 * @param startRow The starting row to check
 	 * @param startCol The starting column to check
 	 * @param endRow The end row to check
@@ -163,10 +143,9 @@ public class Board {
         return false;
     }
 
-    //TODO:
-    // Check whether the 'start' position and 'end' position are adjacent to each other
     /**
      * Verifies if the adjacent squares are free from pieces
+     * 
      * @param startRow The starting row to check
      * @param startCol The starting column to check
      * @param endRow The end row to check
@@ -183,13 +162,9 @@ public class Board {
         return false;
     }
 
-    //TODO:
-    // Checks whether a given 'start' and 'end' position are a valid horizontal move.
-    // Returns a boolean to signify whether:
-    // - The entire move takes place on one row.
-    // - All spaces directly between 'start' and 'end' are empty, i.e., null.
 	/**
 	 * Verifies that horizontal spaces are free
+	 * 
 	 * @param startRow The starting row to check
 	 * @param startCol The starting column to check
 	 * @param endRow The end row to check
@@ -221,13 +196,9 @@ public class Board {
         return false;
     }
 
-    //TODO:
-    // Checks whether a given 'start' and 'end' position are a valid vertical move.
-    // Returns a boolean to signify whether:
-    // - The entire move takes place on one column.
-    // - All spaces directly between 'start' and 'end' are empty, i.e., null.
 	/**
 	 * Ensures vertical squares are available for movement
+	 * 
 	 * @param startRow The starting row to check
 	 * @param startCol The starting column to check
 	 * @param endRow The end row to check
@@ -259,13 +230,9 @@ public class Board {
         return false;
     }
 
-    //TODO:
-    // Checks whether a given 'start' and 'end' position are a valid diagonal move.
-    // Returns a boolean to signify whether:
-    // - The path from 'start' to 'end' is diagonal... change in row and col.
-    // - All spaces directly between 'start' and 'end' are empty, i.e., null.
 	/**
 	 * Verifies if the diagnols are available to move through
+	 * 
 	 * @param startRow The starting row to check
 	 * @param startCol The starting column to check
 	 * @param endRow The end row to check
@@ -276,7 +243,12 @@ public class Board {
     	int xDistance = Math.abs(startRow - endRow);
         int yDistance = Math.abs(startCol - endCol);
         
-    	if(xDistance == yDistance) {
+    	if(xDistance == yDistance) { // make sure move is in an even diagonal line
+    		
+    		// test each of five cases, down left, down right, up left, up right, and no move
+    		// for each case move in a diagonal line down the path and make sure each
+    		// space along the way is null
+    		
     		if(startRow > endRow) {
     			if(startCol > endCol) {
     				for(int i = 1; i < startRow-endRow; i++) {
