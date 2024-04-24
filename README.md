@@ -1,2 +1,2 @@
-Chess
-## console chess in java
+# Chess
+console chess in java
