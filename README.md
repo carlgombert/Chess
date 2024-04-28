@@ -1,2 +1,3 @@
 # Chess
-console chess in java
+Desktop chess in Java, play locally with friends.  
+GUI built with Java AWT
