@@ -1,8 +1,8 @@
-package main.pieces;
+package model.pieces;
 
-import main.Board;
+import model.Board;
 
-public class King {
+public class Rook {
 	
 	// Instance variables
     private int row;
@@ -10,23 +10,24 @@ public class King {
     private boolean isBlack;
     /**
      * Constructor.
-     * @param row   The row of the king.
-     * @param col   The column of the king .
-     * @param isBlack   The color of the king.
+     * @param row   The row of the rook.
+     * @param col   The column of the rook.
+     * @param isBlack   The color of the rook.
      */
-    public King(int row, int col, boolean isBlack) {
+    public Rook(int row, int col, boolean isBlack) {
         this.row = row;
         this.col = col;
         this.isBlack = isBlack;
     }
     /**
      * Verifies that the move is legal
-     * @param board the board that the king is on
+     * @param board the board that the rook is on
      * @param endRow The end row to check
      * @param endCol the end column to check
      * @return returns a boolean true if the move is legal and false if the move is illegal
      */
 	public boolean isMoveLegal(Board board, int endRow, int endCol) {
-		return board.verifyAdjacent(row, col, endRow, endCol);
+		boolean legal = board.verifyVertical(row, col, endRow, endCol) || board.verifyHorizontal(row, col, endRow, endCol);
+		return legal;
     }
 }

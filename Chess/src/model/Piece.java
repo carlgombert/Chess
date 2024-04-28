@@ -1,13 +1,13 @@
-package main;
+package model;
 
 import java.util.Scanner;
 
-import main.pieces.Bishop;
-import main.pieces.King;
-import main.pieces.Knight;
-import main.pieces.Pawn;
-import main.pieces.Queen;
-import main.pieces.Rook;
+import model.pieces.Bishop;
+import model.pieces.King;
+import model.pieces.Knight;
+import model.pieces.Pawn;
+import model.pieces.Queen;
+import model.pieces.Rook;
 
 public class Piece {
     // Create Instance Variables
@@ -74,7 +74,9 @@ public class Piece {
      * @param col   The column to move the piece to.
      */
     public void setPosition(int row, int col) {
-        if(this.character == '\u265f' && this.isBlack && row == 7){
+    	this.row = row;
+        this.col = col;
+        /*if(this.character == '\u265f' && this.isBlack && row == 7){
             this.row = row;
             this.col = col;
             this.promotePawn(row, true);
@@ -85,7 +87,7 @@ public class Piece {
         } else{
             this.row = row;
             this.col = col;
-        }
+        }*/
 
     }
 
@@ -102,7 +104,7 @@ public class Piece {
      * @param row Current row of the pawn
      * @param isBlack Color of the pawn
      */
-    public void promotePawn(int row, boolean isBlack) {
+    /*public void promotePawn(int row, boolean isBlack) {
     	Scanner pieceCheck = new Scanner(System.in);
         System.out.println("Enter the type you want to promote to (Knight, Bishop, Rook, or Queen");
         System.out.println("Enter 1,2,3,4 respectively");
@@ -143,7 +145,7 @@ public class Piece {
             }
         }
 
-    }
+    }*/
 
     /**
      * Returns the character

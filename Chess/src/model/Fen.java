@@ -1,4 +1,4 @@
-package main;
+package model;
 /**
  * For CSCI 1933 Project 2
  * The Fen class was designed to load an object of type

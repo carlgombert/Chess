@@ -1,6 +1,6 @@
-package main.pieces;
+package model.pieces;
 
-import main.Board;
+import model.Board;
 
 public class Knight {
 	

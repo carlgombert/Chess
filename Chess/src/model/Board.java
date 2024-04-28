@@ -1,4 +1,7 @@
-package main;
+package model;
+
+import controller.Game;
+import view.CellManager;
 
 public class Board {
 
@@ -10,6 +13,8 @@ public class Board {
 	 */
 	public Board() {
     	board = new Piece[8][8];
+    	
+    	Game.cellManager = new CellManager(board);
     }
 
     // Accessor Methods
